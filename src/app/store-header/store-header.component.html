@@ -1,17 +1,14 @@
 <header>
   <h1>My store</h1>
-  <form id="filter-form">
-    <input type="text" id="search-product" name="search" placeholder="Search for product">
-    <input type="number" id="min-price" placeholder="Min-price">
-    <input type="number" id="max-price" placeholder="max-price">
-  </form>
+ <app-filters-list></app-filters-list>
   <div class="shoppingcart-container">
           <h3>shopping cart</h3>
           <ul id="shoppingcart-list"></ul>
           <div class="shoppingcart-review">
                 <p>Total Quantity: <span id="cart-total-quantity"></span></p>
                 <p> Total Price $:<span id="cart-total-price"></span></p>
-          </div>
+                <button (click)="get_Data()">Click</button>
+              </div>
   </div>
 
 

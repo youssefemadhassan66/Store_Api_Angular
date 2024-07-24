@@ -1,1 +1,16 @@
-<p>store-products works!</p>
+
+<div class="product-container" >
+
+  <div class="product-card" *ngFor="let product of products">
+
+      <img [src]="product.image" alt="">
+    <h5>{{product.title}}</h5>
+    <h5>${{product.price}}</h5>
+    <div class="product-btns">
+          <button [id]="product.id" class="add-cart-btn btn btn-primary">Add to cart</button>
+          <button [id]="product.id" class="View-product-details btn btn-primary">View details</button>
+
+    </div>
+  </div>
+
+</div>
