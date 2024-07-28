@@ -1,0 +1,22 @@
+<form (ngSubmit)="onFromSubmit(myForm)" #myForm="ngForm" id="filter-form">
+  <input type="text" id="search-product" name="searchedProduct" placeholder="Search for product" ngModel>
+  <input type="number" id="min-price" placeholder="Min-price" name="Min_Price" ngModel>
+  <input type="number" id="max-price" placeholder="max-price" name="Max_Price" ngModel>
+
+  <select name="categoriesFilter" id="categories-filter"[(ngModel)]="filterData.categoriesFilter">
+      <option value="all" >All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="men's clothing">mens-cloth</option>
+      <option value="women's clothing">women's clothing</option>
+      <option value="jewelery">jewelery</option>
+  </select>
+
+  <select name="SortFilter" id="sorting-filter" [(ngModel)]="filterData.sortFilter">
+      <option value="a-z">A-Z</option>
+      <option value="z-a">Z-A</option>
+      <option value="L-H">Low to high</option>
+      <option value="H-L">High to low</option>
+  </select>
+
+  <button type="submit" class="btn btn-success">Apply Filters</button>
+</form>

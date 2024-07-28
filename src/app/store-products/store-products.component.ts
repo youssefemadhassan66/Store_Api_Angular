@@ -7,12 +7,17 @@ import { ApiFetchService } from '../api-fetch.service';
   styleUrl: './store-products.component.css'
 })
 export class StoreProductsComponent implements OnInit{
+
   products:productSchema[] = [];
+
   constructor(private apiFetchService: ApiFetchService) {}
-  ngOnInit(): void {
-    this.apiFetchService.getProducts().subscribe((products) => {
-    this.products = products;
-    });
+
+    ngOnInit(): void {
+
+          this.apiFetchService.getProducts().subscribe((products) => {
+          this.products = products;
+
+        });
     }
 
 
