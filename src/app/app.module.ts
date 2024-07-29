@@ -8,6 +8,7 @@ import { StoreProductsComponent } from './store-products/store-products.componen
 import { FiltersListComponent } from './filters-form/filters-list.component';
 import { FormsModule } from '@angular/forms';
 import {ApiFetchService } from './api-fetch.service'
+import { FilterProductService } from './filterd-products.service';
 
 
 
@@ -15,8 +16,8 @@ import {ApiFetchService } from './api-fetch.service'
   declarations: [
     AppComponent,
     StoreHeaderComponent,
-    StoreProductsComponent,
-    FiltersListComponent
+    FiltersListComponent,
+    StoreProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,10 @@ import {ApiFetchService } from './api-fetch.service'
     HttpClientModule,
     FormsModule
   ],
-  providers: [ApiFetchService],
+  providers: [
+    ApiFetchService,
+    FilterProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

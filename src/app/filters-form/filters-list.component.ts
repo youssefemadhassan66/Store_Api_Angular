@@ -1,42 +1,45 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { productSchema } from '../product.interface';
 import { ApiFetchService } from '../api-fetch.service';
 import { NgForm } from '@angular/forms';
+import { FilterProductService } from '../filterd-products.service';
 @Component({
   selector: 'app-filters-list',
   templateUrl: './filters-list.component.html',
-  styleUrl: './filters-list.component.css'
+  styleUrls: ['./filters-list.component.css']
 })
-export class FiltersListComponent {
+export class FiltersListComponent implements OnInit {
 
-  products:productSchema[] = [];
+  products: productSchema[] = [];
+  filteredProducts: productSchema[] = [];
 
-  constructor(private apiFetchService: ApiFetchService) {}
+  constructor(private apiFetchService: ApiFetchService, private FilterProductService: FilterProductService) {}
+  ngOnInit(): void {
+    this.apiFetchService.getProducts().subscribe((products) => {
+      this.products = products;
+      console.log('Products fetched:', this.products);
+    });
+  }
 
-    // FETCHING Products
-    ngOnInit(): void {
+  filterData = {
+    categoriesFilter: 'all'
+  };
 
-          this.apiFetchService.getProducts().subscribe((products) => {
-          this.products = products;
+  onFromSubmit(form: NgForm): void {
+    console.log('Form submitted', form.value);
 
-        });
-    }
+    this.filteredProducts = this.products.filter((product) => {
 
-    filterData = {
-      searchedProduct: '',
-      minPrice: null,
-      maxPrice: null,
-      categoriesFilter: 'all',
-      sortFilter: 'a-z'
-    };
+      let Min_price = form.value.Min_Price ? form.value.Min_Price : 0;
+      let Max_price = form.value.Max_Price ?  form.value.Max_Price : 2000000;
 
+      return product.title.toLowerCase().includes(form.value.searchedProduct.toLowerCase()) &&
+        product.price >= Number(Min_price) &&
+        product.price <= Number(Max_price) &&
+        (form.value.categoriesFilter === 'all' || product.category === form.value.categoriesFilter);
+    });
 
-    onFromSubmit(form:NgForm){
-      console.log(form.value);
+    console.log('Filtered Products:', this.filteredProducts);
 
-    }
-
-
-
+    this.FilterProductService.updateFilteredProducts(this.filteredProducts);  }
 }
-

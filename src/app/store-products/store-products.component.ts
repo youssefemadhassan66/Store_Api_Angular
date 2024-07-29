@@ -1,24 +1,21 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FilterProductService } from '../filterd-products.service';
 import { productSchema } from '../product.interface';
-import { ApiFetchService } from '../api-fetch.service';
+import { NgModel } from '@angular/forms';
 @Component({
   selector: 'app-store-products',
   templateUrl: './store-products.component.html',
   styleUrl: './store-products.component.css'
 })
-export class StoreProductsComponent implements OnInit{
+export class TargetComponent implements OnInit {
+  filteredProducts: productSchema[] = [];
 
-  products:productSchema[] = [];
+  constructor(private FilterProductService: FilterProductService) {}
 
-  constructor(private apiFetchService: ApiFetchService) {}
-
-    ngOnInit(): void {
-
-          this.apiFetchService.getProducts().subscribe((products) => {
-          this.products = products;
-
-        });
-    }
-
-
+  ngOnInit(): void {
+    this.FilterProductService.filteredProducts$.subscribe((products) => {
+      this.filteredProducts = products;
+      console.log('Filtered Products in TargetComponent:', this.filteredProducts);
+    });
+  }
 }
